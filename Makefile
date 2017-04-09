@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/04 15:08:39 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/09 13:51:16 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LIST))
 all: $(NAME)
 
 $(NAME) : $(OBJS) $(LIB)
-	@ar rc $(NAME) $(OBJS) $(LIB)
+	@mkdir -p $(OBJS_DIR)/libft
+	@cd $(OBJS_DIR)/libft && ar x ../../$(LIB)
+	@ar rc $(NAME) $(OBJS) $(OBJS_DIR)/libft/*.o $(LIB)
 	@ranlib $(NAME)
 	@printf "\e[32mLibrary \e[1m$(NAME)\e[0m\e[32m successfully compiled.\e[0m\n"
 
@@ -63,7 +65,7 @@ fclean :
 	@printf "\e[33mLibrary \e[1m$(NAME)\e[0m\e[33m and its projects files have been removed.\e[0m\n"
 
 test : all
-	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -Llibft -lft -g main.c
+	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -g main.c
 	@printf "Test binary created\n"
 
 re: fclean all
