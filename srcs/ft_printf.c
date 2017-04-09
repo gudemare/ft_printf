@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 13:00:10 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/09 19:27:01 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:38:59 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		handle_flag(const char *restrict *str, va_list ap)
 		*str += 2;
 		return (1);
 	}
-	spec.format = 0;
+	spec.conv_type = '\0';
 	*str = fill_spec(*str, spec);
 /*	if (c == 'd' || c == 'D' || c == 'i' || c == 'o' || c == 'O' || c == 'p' ||
 			c == 'u' || c == 'U' || c == 'x' || c == 'X')

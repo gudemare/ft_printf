@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/09 19:00:15 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/09 19:43:41 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ test : all
 
 re: fclean all
 
-debug : CFLAGS=-Wall -Wextra -fsanitize=address -g
-debug : norme all
+debug : CFLAGS=-Wall -Wextra -g
+debug : all
 
 debug_re : fclean debug

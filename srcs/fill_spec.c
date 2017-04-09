@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/09 19:05:55 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:58:28 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static const char	*fill_format(const char *restrict str, char	**format)
 		*format = ft_strnew(i);
 		while (i > 0)
 		{
-			*format[i - 1] = str[i - 1];
+			(*format)[i - 1] = str[i - 1];
 			i--;
 		}
 	}
-	return (str);
+	return (str + i);
 }
 
 static const char	*fill_width(const char *restrict str, int *width)
@@ -79,7 +79,7 @@ static const char	*fill_length(const char *restrict str, char	**length)
 			i--;
 		}
 	}
-	return (str);
+	return (str + i);
 }
 
 const char		*fill_spec(const char *restrict str, t_spec spec)
