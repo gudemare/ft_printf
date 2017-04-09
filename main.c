@@ -6,17 +6,38 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 14:31:31 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/04 15:00:49 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/09 19:35:51 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_printf.h"
 
-int main(void)
+int		main(void)
 {
-	ft_printf("Bonjour ! \n");
-	ft_printf("Bonjour ! %%%%\n");
-	ft_printf("%s %d\n", "Bonjour", 569);
-	ft_printf("%d\n", 526);
+	int		ret;
+
+	printf("--==[Testing ft_printf (Faulty display...)]==--\nprintf : <");
+	ret = printf("Bonjour !");
+	printf("> (%d)\nft_printf : <", ret);
+	ret = ft_printf("Bonjour !");
+	printf("> (%d)\nprintf : <", ret);
+	ret = printf("Bonjour %%!");
+	printf("> (%d)\nft_printf : <", ret);
+	ret = ft_printf("Bonjour %%!");
+	printf("> (%d)\nprintf : <", ret);
+	ret = printf("Bonjour %s !", "Xavier");
+	printf("> (%d)\nft_printf : <", ret);
+	ret = ft_printf("Bonjour %s !", "Xavier");
+	printf("> (%d)\nprintf : <", ret);
+	ret = printf("Bonjour %d !", 42);
+	printf("> (%d)\nft_printf : <", ret);
+	ret = ft_printf("Bonjour %d !", 42);
+	printf("> (%d)\nprintf : <", ret);
+	ret = printf("Bonjour %c !", 'A');
+	printf("> (%d)\nft_printf : <", ret);
+	ret = ft_printf("Bonjour %c !", 'A');
+	printf("> (%d)\nprintf : <", ret);
+	//ft_printf("%#0-51.123lld", 526);
 	return (0);
 }
