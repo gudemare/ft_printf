@@ -6,16 +6,17 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/09 19:58:28 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/09 23:56:34 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 
-static const char	*fill_format(const char *restrict str, char	**format)
+static int	fill_format(const char *restrict str, char **format)
 {
 	int		i;
+	int		j;
 
 	i = 0;
 	*format = 0;
@@ -25,71 +26,82 @@ static const char	*fill_format(const char *restrict str, char	**format)
 	if (i != 0)
 	{
 		*format = ft_strnew(i);
-		while (i > 0)
+		j = i;
+		while (j > 0)
 		{
-			(*format)[i - 1] = str[i - 1];
-			i--;
+			(*format)[j - 1] = str[j - 1];
+			j--;
 		}
 	}
-	return (str + i);
+	return (i);
 }
 
-static const char	*fill_width(const char *restrict str, int *width)
-{
-	*width = 0;
-	while (ft_isdigit(*str))
-	{
-		*width *= 10;
-		*width += *str - '0';
-		str++;
-	}
-	return (str);
-}
-
-static const char	*fill_precision(const char *restrict str, int *precision)
-{
-	*precision = 0;
-	if (*str == '.')
-	{
-		str++;
-		while (ft_isdigit(*str))
-		{
-			*precision *= 10;
-			*precision += *str - '0';
-			str++;
-		}
-	}
-	return (str);
-}
-
-static const char	*fill_length(const char *restrict str, char	**length)
+static int	fill_width(const char *restrict str, int *width)
 {
 	int		i;
 
 	i = 0;
+	*width = 0;
+	while (ft_isdigit(str[i]))
+	{
+		*width *= 10;
+		*width += str[i] - '0';
+		i++;
+	}
+	return (i);
+}
+
+static int	fill_precision(const char *restrict str, int *precision)
+{
+	int		i;
+
+	i = 0;
+	*precision = 0;
+	if (str[i] == '.')
+	{
+		i++;
+		while (ft_isdigit(str[i]))
+		{
+			*precision *= 10;
+			*precision += str[i] - '0';
+			i++;
+		}
+	}
+	return (i);
+}
+
+static int	fill_length(const char *restrict str, char **length)
+{
+	int		i;
+	int		j;
+
+	i = 0;
 	*length = 0;
-	while (*str == 'h' || *str == 'l' || *str == 'j' || *str == 'z')
+	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j' || str[i] == 'z')
 		i++;
 	if (i != 0)
 	{
 		*length = ft_strnew(i);
-		while (i > 0)
+		j = i;
+		while (j > 0)
 		{
-			*length[i - 1] = str[i - 1];
-			i--;
+			(*length)[j - 1] = str[j - 1];
+			j--;
 		}
 	}
-	return (str + i);
+	return (i);
 }
 
-const char		*fill_spec(const char *restrict str, t_spec spec)
+int			fill_spec(const char *restrict str, t_spec spec)
 {
-	str++;
-	str = fill_format(str, &(spec.format));
-	str = fill_width(str, &(spec.min_width));
-	str = fill_precision(str, &(spec.precision));
-	str = fill_length(str, &(spec.length));
-	spec.conv_type = *str;	
-	str++;
-	return (str);
+	int		i;
+
+	i = 1;
+	i += fill_format(str + i, &(spec.format));
+	i += fill_width(str + i, &(spec.min_width));
+	i += fill_precision(str + i, &(spec.precision));
+	i += fill_length(str + i, &(spec.length));
+	spec.conv_type = str[i];
+	i++;
+	return (i);
 }
