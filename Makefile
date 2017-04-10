@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/10 00:17:37 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/10 02:49:14 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS_LIST	=	\
 				ft_printf.c \
 				fill_spec.c \
 				handle_format.c \
-				handle_width.c \
 				handle_convertion.c \
 				handle_int.c \
 				handle_str.c \

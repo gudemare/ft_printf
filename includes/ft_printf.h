@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 13:04:34 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 00:16:39 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:49:39 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,15 @@ typedef struct	s_spec
 	int			min_width;
 	int			precision;
 	char		*length;
-	char		conv_type;
+	char		conv;
 }				t_spec;
 
-int				handle_int(const char *restrict str, va_list ap);
-int				handle_str(const char *restrict str, va_list ap);
-int				handle_char(const char *restrict str, va_list ap);
+char			*handle_int(va_list ap, t_spec spec);
+char			*handle_str(va_list ap, t_spec spec);
+char			*handle_char(va_list ap, t_spec spec);
+int				handle_format(char *f_o, t_spec spec);
 char			*handle_convertion(va_list ap, t_spec spec);
-char			*handle_width(char *str, int width);
-int				handle_format(char *str, char *format);
-int				fill_spec(const char *restrict str, t_spec spec);
+int				fill_spec(const char *restrict str, t_spec *spec);
 int				ft_printf(const char *restrict str, ...);
 
 #endif

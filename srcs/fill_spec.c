@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/09 23:56:34 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:32:33 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,16 @@ static int	fill_length(const char *restrict str, char **length)
 	return (i);
 }
 
-int			fill_spec(const char *restrict str, t_spec spec)
+int			fill_spec(const char *restrict str, t_spec *spec)
 {
 	int		i;
 
 	i = 1;
-	i += fill_format(str + i, &(spec.format));
-	i += fill_width(str + i, &(spec.min_width));
-	i += fill_precision(str + i, &(spec.precision));
-	i += fill_length(str + i, &(spec.length));
-	spec.conv_type = str[i];
+	i += fill_format(str + i, &(spec->format));
+	i += fill_width(str + i, &(spec->min_width));
+	i += fill_precision(str + i, &(spec->precision));
+	i += fill_length(str + i, &(spec->length));
+	spec->conv = str[i];
 	i++;
 	return (i);
 }

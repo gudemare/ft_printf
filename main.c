@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 14:31:31 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 00:00:35 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:39:38 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int		main(void)
 	printf("> (%d)\nft_printf : <", ret);
 	ret = ft_printf("Bonjour %%!");
 	printf("> (%d)\nprintf : <", ret);
+	ret = printf("Bonjour %c !", 'A');
+	printf("> (%d)\nft_printf : <", ret);
+	ret = ft_printf("Bonjour %c !", 'A');
+	printf("> (%d)\nprintf : <", ret);
 	ret = printf("Bonjour %s !", "Xavier");
 	printf("> (%d)\nft_printf : <", ret);
 	ret = ft_printf("Bonjour %s !", "Xavier");
@@ -34,10 +38,5 @@ int		main(void)
 	printf("> (%d)\nft_printf : <", ret);
 	ret = ft_printf("Bonjour %d !", 42);
 	printf("> (%d)\nprintf : <", ret);
-	ret = printf("Bonjour %c !", 'A');
-	printf("> (%d)\nft_printf : <", ret);
-	ret = ft_printf("Bonjour %c !", 'A');
-	printf("> (%d)\nprintf : <", ret);
-	//ft_printf("%#0-51.123lld", 526);
 	return (0);
 }

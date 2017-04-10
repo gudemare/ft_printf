@@ -6,15 +6,18 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 14:35:41 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/09 23:54:30 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:35:51 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		handle_int(const char *restrict str, va_list ap)
+char	*handle_int(va_list ap, t_spec spec)
 {
-	(void)str;
-	(void)ap;
-	return (0);
+	char	*f_o;
+
+	if (!(f_o = ft_itoa(va_arg(ap, int))))
+		return (0);
+	(void)spec;
+	return (f_o);
 }

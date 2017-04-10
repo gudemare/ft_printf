@@ -6,15 +6,18 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 14:35:39 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/09 23:54:30 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:34:20 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		handle_str(const char *restrict str, va_list ap)
+char	*handle_str(va_list ap, t_spec spec)
 {
-	(void)str;
-	(void)ap;
-	return (0);
+	char	*f_o;
+
+	if (!(f_o = ft_strdup(va_arg(ap, char *))))
+		return (0);
+	(void)spec;
+	return (f_o);
 }
