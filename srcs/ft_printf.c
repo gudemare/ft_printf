@@ -6,10 +6,11 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 13:00:10 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 02:50:05 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:55:06 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
 
 static int		handle_flag(const char *restrict *str, va_list ap)
@@ -32,6 +33,7 @@ int				ft_printf(const char *restrict str, ...)
 	va_list		ap;
 	int			i;
 	int			ret;
+	int			tmp;
 
 	va_start(ap, str);
 	ret = 0;
@@ -44,7 +46,12 @@ int				ft_printf(const char *restrict str, ...)
 		ret += i;
 		str += i;
 		if (*str == '%')
-			ret += handle_flag(&str, ap);
+		{
+			tmp = handle_flag(&str, ap);
+			if (tmp < 1)
+				break;
+			ret += tmp;
+		}
 	}
 	va_end(ap);
 	return (ret);
