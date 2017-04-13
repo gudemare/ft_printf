@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 14:31:31 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 02:39:38 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:25:52 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int		main(void)
 	ret = printf("Bonjour %d !", 42);
 	printf("> (%d)\nft_printf : <", ret);
 	ret = ft_printf("Bonjour %d !", 42);
-	printf("> (%d)\nprintf : <", ret);
+	printf("> (%d)\n", ret);
 	return (0);
 }
