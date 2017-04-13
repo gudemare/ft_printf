@@ -6,17 +6,42 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:09:49 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 02:49:14 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/13 23:51:51 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 
-int		handle_format(char *f_o, t_spec spec)
+static char		*min_width(char *f_o, int min_width)
+{
+	char	*tmp;
+	int		i;
+
+	if (!(tmp = ft_strnew(min_width)))
+	{
+		free(f_o);
+		return (0);
+	}
+	i = 0;
+	while (i < min_width)
+	{
+		tmp[i] = ' ';
+		i++;
+	}
+	ft_strcpy(tmp + min_width - ft_strlen(f_o), f_o);
+	free(f_o);
+	f_o = tmp;
+	return (f_o);
+}
+
+int				handle_format(char *f_o, t_spec spec)
 {
 	int		ret;
 
+	if ((size_t)spec.min_width > ft_strlen(f_o))
+		if (!(f_o = min_width(f_o, spec.min_width)))
+			return (-1);
 	(void)spec;
 	ret = ft_strlen(f_o);
 	ft_putstr(f_o);

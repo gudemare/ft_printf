@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 14:31:31 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/13 19:25:52 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/13 23:52:14 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,10 @@ int		main(void)
 {
 	int		ret;
 
-	printf("--==[Testing ft_printf (Faulty display...)]==--\nprintf : <");
-	ret = printf("Bonjour !");
-	printf("> (%d)\nft_printf : <", ret);
-	ret = ft_printf("Bonjour !");
-	printf("> (%d)\nprintf : <", ret);
-	ret = printf("Bonjour %%!");
-	printf("> (%d)\nft_printf : <", ret);
-	ret = ft_printf("Bonjour %%!");
-	printf("> (%d)\nprintf : <", ret);
-	ret = printf("Bonjour %c !", 'A');
-	printf("> (%d)\nft_printf : <", ret);
-	ret = ft_printf("Bonjour %c !", 'A');
-	printf("> (%d)\nprintf : <", ret);
-	ret = printf("Bonjour %s !", "Xavier");
-	printf("> (%d)\nft_printf : <", ret);
-	ret = ft_printf("Bonjour %s !", "Xavier");
-	printf("> (%d)\nprintf : <", ret);
-	ret = printf("Bonjour %d !", 42);
-	printf("> (%d)\nft_printf : <", ret);
-	ret = ft_printf("Bonjour %d !", 42);
-	printf("> (%d)\n", ret);
+	printf("--==[Testing ft_printf]==--\nprintf :\n");
+	ret = printf("Bonjour %5d %12s %3c!\n", 42, "Xavier", 'A');
+	printf("(%d)\nft_printf :\n", ret);
+	ret = ft_printf("Bonjour %5d %12s %3c!\n", 42, "Xavier", 'A');
+	printf("(%d)\n", ret);
 	return (0);
 }
