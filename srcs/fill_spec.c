@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 02:32:33 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/13 23:58:35 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	fill_precision(const char *restrict str, int *precision)
 	int		i;
 
 	i = 0;
-	*precision = 0;
+	*precision = -1;
 	if (str[i] == '.')
 	{
 		i++;
