@@ -6,16 +6,9 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/13 17:07:08 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/19 19:01:07 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-##### TODO #####
-# Make variables for color and bold
-# Display Error on norme
-# norme ok is one line off when at bottom of window
-# Multithread with -j8 option for make (breaks display)
-# Divide functions in multiple sub-directories
 
 NAME		=	libft.a
 
@@ -122,6 +115,29 @@ OBJS_DIR	=	./objs/
 OBJS_LIST	=	$(patsubst %.c, %.o, $(SRCS_LIST))
 OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LIST))
 
+END_GRAPHICS=	\e[0m
+BOLD		=	\e[1m
+DARK		=	\e[2m
+ITALIC		=	\e[3m
+UNDERSCORE	=	\e[4m
+REVERSE_VID	=	\e[7m
+BLACK		=	\e[30m
+RED			=	\e[31m
+GREEN		=	\e[32m
+YELLOW		=	\e[33m
+BLUE		=	\e[34m
+MAGENTA		=	\e[35m
+CYAN		=	\e[36m
+WHITE		=	\e[37m
+BLACK_BG	=	\e[40m
+RED_BG		=	\e[41m
+GREEN_BG	=	\e[42m
+YELLOW_BG	=	\e[43m
+BLUE_BG		=	\e[44m
+MAGENTA_BG	=	\e[45m
+CYAN_BG		=	\e[46m
+WHITE_BG	=	\e[47m
+
 .PHONY : all norme clean fclean re debug debug_re
 
 all: $(NAME)
@@ -129,33 +145,16 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@printf "\e[32mLibrary \e[1m$(NAME)\e[0m\e[32m successfully compiled.\e[0m\n"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR) $(OBJS_DIR){btree,display,list,math,memory,misc,string}
-#	@printf "\e[36mCompilation of \e[36m\e[1m$(notdir $<)\e[0m\e[36m ..."
+	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN)...\n\e[A$(END_GRAPHICS)"
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -c $< -o $@
-#	@printf "\e[$$(tput cols)C\e[5D\e[32m\e[7m[ OK ]\e[21m\e[0m\n"
 
-
-norme :
-	@if type "norminette" &> /dev/null ; then\
-		printf "\e[34m\e[1mChecking Norm ...\e[s\n\e[0m" && \
-		norminette $(SRCS) $(HEADERS_DIR)*.h | grep -v -B 1 "^Norme: " || printf "\e[u\e[$$(tput cols)C\e[11D\e[32m\e[7m[ NORME OK ]\e[21m\e[0m\n" ; \
-	else\
-		printf "\e[31mNorminette not installed, not checking norm.\e[$$(tput cols)C\e[8D\e[7m[ Error ]\n\e[21m\e[0m";\
-	fi
 
 clean :
 	@rm -rf $(OBJS_DIR)
-	@printf "\e[33m$(NAME)'s objects files have been removed.\e[0m\n"
 fclean :
 	@rm -rf $(NAME) $(OBJS_DIR)
-	@printf "\e[33mLibrary \e[1m$(NAME)\e[0m\e[33m and its projects files have been removed.\e[0m\n"
 
 re: fclean all
-
-debug : CFLAGS=-Wall -Wextra -fsanitize=address -g
-debug : norme all
-
-debug_re : fclean debug

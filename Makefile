@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/10 02:49:14 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/19 19:05:55 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,40 +35,64 @@ OBJS_DIR	=	./objs/
 OBJS_LIST	=	$(patsubst %.c, %.o, $(SRCS_LIST))
 OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LIST))
 
+END_GRAPHICS=	\e[0m
+BOLD		=	\e[1m
+DARK		=	\e[2m
+ITALIC		=	\e[3m
+UNDERSCORE	=	\e[4m
+REVERSE_VID	=	\e[7m
+BLACK		=	\e[30m
+RED			=	\e[31m
+GREEN		=	\e[32m
+YELLOW		=	\e[33m
+BLUE		=	\e[34m
+MAGENTA		=	\e[35m
+CYAN		=	\e[36m
+WHITE		=	\e[37m
+BLACK_BG	=	\e[40m
+RED_BG		=	\e[41m
+GREEN_BG	=	\e[42m
+YELLOW_BG	=	\e[43m
+BLUE_BG		=	\e[44m
+MAGENTA_BG	=	\e[45m
+CYAN_BG		=	\e[46m
+WHITE_BG	=	\e[47m
+
 .PHONY : all norme clean fclean re debug debug_re
 
 all: $(NAME)
 
-$(NAME) : $(OBJS) $(LIB)
+$(NAME) : $(LIB) $(OBJS)
 	@mkdir -p $(OBJS_DIR)/libft
 	@cd $(OBJS_DIR)/libft && ar x ../../$(LIB)
 	@ar rc $(NAME) $(OBJS) $(OBJS_DIR)/libft/*.o $(LIB)
 	@ranlib $(NAME)
-	@printf "\e[32mLibrary \e[1m$(NAME)\e[0m\e[32m successfully compiled.\e[0m\n"
+	@printf "$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled.$(END_GRAPHICS)\n"
 
 $(LIB) :
-	@make -C libft -j8 1>/dev/null
+	@make -C libft -j8
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
+	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN)...\n\e[A$(END_GRAPHICS)"
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -c $< -o $@
 
 norme :
 	@if type "norminette" &> /dev/null ; then\
-		printf "\e[34m\e[1mChecking Norm ...\e[s\n\e[0m" && \
-		norminette $(SRCS) $(HEADERS_DIR)*.h | grep -v -B 1 "^Norme: " || printf "\e[u\e[$$(tput cols)C\e[11D\e[32m\e[7m[ NORME OK ]\e[21m\e[0m\n" ; \
+		printf "$(BLUE)$(BOLD)Checking Norm ...$(END_GRAPHICS)\n\e[A" && \
+		norminette $(SRCS) $(HEADERS_DIR)*.h | grep -v -B 1 "^Norme: " || printf "\e[$$(tput cols)C\e[11D$(GREEN)$(REVERSE_VID)[ NORME OK ]$(END_GRAPHICS)\n" ; \
 	else\
-		printf "\e[31mNorminette not installed, not checking norm.\e[$$(tput cols)C\e[8D\e[7m[ Error ]\n\e[21m\e[0m";\
+		printf "$(RED)Norminette not installed, not checking norm.\n$(END_GRAPHICS)";\
 	fi
 
 clean :
 	@make -C libft clean 1>/dev/null
 	@rm -rf $(OBJS_DIR)
-	@printf "\e[33m$(NAME)'s objects files have been removed.\e[0m\n"
+	@printf "$(YELLOW)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(YELLOW)'s objects files have been removed.$(END_GRAPHICS)\n"
 fclean :
 	@make -C libft fclean 1>/dev/null
 	@rm -rf $(NAME) $(OBJS_DIR)
-	@printf "\e[33mLibrary \e[1m$(NAME)\e[0m\e[33m and its projects files have been removed.\e[0m\n"
+	@printf "$(YELLOW)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(YELLOW) and its objects files have been removed.$(END_GRAPHICS)\n"
 
 test : all
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -g main.c
