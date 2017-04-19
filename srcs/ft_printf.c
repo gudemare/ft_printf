@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 13:00:10 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/13 19:55:06 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/19 19:04:24 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				ft_printf(const char *restrict str, ...)
 		{
 			tmp = handle_flag(&str, ap);
 			if (tmp < 1)
-				break;
+				break ;
 			ret += tmp;
 		}
 	}
