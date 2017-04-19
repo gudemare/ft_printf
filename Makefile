@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/19 19:05:55 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/19 19:35:28 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,9 +63,9 @@ WHITE_BG	=	\e[47m
 all: $(NAME)
 
 $(NAME) : $(LIB) $(OBJS)
-	@mkdir -p $(OBJS_DIR)/libft
-	@cd $(OBJS_DIR)/libft && ar x ../../$(LIB)
-	@ar rc $(NAME) $(OBJS) $(OBJS_DIR)/libft/*.o $(LIB)
+	@mkdir -p $(OBJS_DIR)
+	@ar rc tmp.a $(OBJS)
+	@libtool -static -o $(NAME) - tmp.a $(LIB) ; rm tmp.a
 	@ranlib $(NAME)
 	@printf "$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled.$(END_GRAPHICS)\n"
 
@@ -74,7 +74,7 @@ $(LIB) :
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN)...\n\e[A$(END_GRAPHICS)"
+	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN) ...\n\e[A$(END_GRAPHICS)"
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -c $< -o $@
 
 norme :
