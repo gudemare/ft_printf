@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/20 09:29:09 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/20 11:06:18 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,13 @@ HEADERS_DIR	=	includes/
 
 SRCS_DIR	=	srcs/
 SRCS_LIST	=	\
-				ft_printf.c \
 				fill_spec.c \
+				ft_printf.c \
+				handle_char.c
+				handle_conversion.c \
 				handle_format.c \
-				handle_convertion.c \
 				handle_int.c \
 				handle_str.c \
-				handle_char.c
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
 OBJS_DIR	=	./objs/
