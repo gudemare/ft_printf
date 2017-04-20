@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:10:39 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/10 02:09:48 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/04/20 10:03:17 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ char	*handle_convertion(va_list ap, t_spec spec)
 		f_o = handle_int(ap, spec);
 	else if (spec.conv == 's' || spec.conv == 'S')
 		f_o = handle_str(ap, spec);
+	else if (spec.conv == '%')
+	{
+		f_o = ft_strnew(1);
+		f_o[0] = '%';
+	}
 	else
 		f_o = handle_char(ap, spec);
 	return (f_o);
