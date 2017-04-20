@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/19 19:35:28 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/20 09:29:09 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,23 +58,31 @@ MAGENTA_BG	=	\e[45m
 CYAN_BG		=	\e[46m
 WHITE_BG	=	\e[47m
 
-.PHONY : all norme clean fclean re debug debug_re
+.PHONY : all progress norme clean fclean re debug debug_re
 
 all: $(NAME)
 
-$(NAME) : $(LIB) $(OBJS)
+$(NAME) : $(LIB) progress $(OBJS)
 	@mkdir -p $(OBJS_DIR)
 	@ar rc tmp.a $(OBJS)
 	@libtool -static -o $(NAME) - tmp.a $(LIB) ; rm tmp.a
 	@ranlib $(NAME)
-	@printf "$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled.$(END_GRAPHICS)\n"
+	@tput cnorm
+	@printf "\e[u$(END_GRAPHICS)\n$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled.$(END_GRAPHICS)\n"
 
 $(LIB) :
-	@make -C libft -j8
+	@stty -echo 
+	@tput civis
+	@make -C libft -j -s
+
+progress :
+	@printf "$(ITALIC)$(CYAN)Compiling $(BOLD)$(notdir $(NAME)) ...$(END_GRAPHICS)$(WHITE)\n\e[s"
+	@printf "\xE2\x96\xae%.0s" {1..7}
+	@printf "\e[u$(END_GRAPHICS)"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN) ...\n\e[A$(END_GRAPHICS)"
+	@printf "$(GREEN)\xE2\x9D\x9a"
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -c $< -o $@
 
 norme :
