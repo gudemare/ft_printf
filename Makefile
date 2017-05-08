@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/20 11:06:18 by gudemare         ###   ########.fr        #
+#    Updated: 2017/05/08 17:05:29 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ SRCS_DIR	=	srcs/
 SRCS_LIST	=	\
 				fill_spec.c \
 				ft_printf.c \
-				handle_char.c
+				handle_char.c \
 				handle_conversion.c \
 				handle_format.c \
 				handle_int.c \
-				handle_str.c \
+				handle_str.c
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
 OBJS_DIR	=	./objs/
@@ -58,31 +58,23 @@ MAGENTA_BG	=	\e[45m
 CYAN_BG		=	\e[46m
 WHITE_BG	=	\e[47m
 
-.PHONY : all progress norme clean fclean re debug debug_re
+.PHONY : all norme clean fclean re debug debug_re
 
 all: $(NAME)
 
-$(NAME) : $(LIB) progress $(OBJS)
+$(NAME) : $(LIB) $(OBJS)
 	@mkdir -p $(OBJS_DIR)
 	@ar rc tmp.a $(OBJS)
 	@libtool -static -o $(NAME) - tmp.a $(LIB) ; rm tmp.a
 	@ranlib $(NAME)
-	@tput cnorm
-	@printf "\e[u$(END_GRAPHICS)\n$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled.$(END_GRAPHICS)\n"
+	@printf "$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled.$(END_GRAPHICS)\n"
 
 $(LIB) :
-	@stty -echo 
-	@tput civis
-	@make -C libft -j -s
-
-progress :
-	@printf "$(ITALIC)$(CYAN)Compiling $(BOLD)$(notdir $(NAME)) ...$(END_GRAPHICS)$(WHITE)\n\e[s"
-	@printf "\xE2\x96\xae%.0s" {1..7}
-	@printf "\e[u$(END_GRAPHICS)"
+	@make -C libft -j8
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	@printf "$(GREEN)\xE2\x9D\x9a"
+	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN) ...\n\e[A$(END_GRAPHICS)"
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -c $< -o $@
 
 norme :

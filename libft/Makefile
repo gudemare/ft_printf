@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/04/20 09:28:01 by gudemare         ###   ########.fr        #
+#    Updated: 2017/04/19 19:10:20 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,25 +138,17 @@ MAGENTA_BG	=	\e[45m
 CYAN_BG		=	\e[46m
 WHITE_BG	=	\e[47m
 
-.PHONY : all progress norme clean fclean re debug debug_re
+.PHONY : all norme clean fclean re debug debug_re
 
 all: $(NAME)
 
-$(NAME) :
-	@make progress
-	@make $(OBJS)
+$(NAME) : $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@printf "\e[u\n$(END_GRAPHICS)"
-
-progress :
-	@printf "$(ITALIC)$(CYAN)Compiling $(BOLD)$(notdir $(NAME)) ...$(END_GRAPHICS)$(WHITE)\n\e[s"
-	@printf "\xE2\x96\xae%.0s" {1..90}
-	@printf "\e[u$(END_GRAPHICS)"
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR) $(OBJS_DIR){btree,display,list,math,memory,misc,string}
-	@printf "$(GREEN)\xE2\x9D\x9a"
+	@printf "\e[K$(CYAN)Compiling $(BOLD)$(notdir $<)$(END_GRAPHICS)$(CYAN) ...\n\e[A$(END_GRAPHICS)"
 	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -c $< -o $@
 
 
