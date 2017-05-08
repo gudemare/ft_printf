@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/05/08 17:05:29 by gudemare         ###   ########.fr        #
+#    Updated: 2017/05/08 22:03:32 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,13 +94,20 @@ fclean :
 	@rm -rf $(NAME) $(OBJS_DIR)
 	@printf "$(YELLOW)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(YELLOW) and its objects files have been removed.$(END_GRAPHICS)\n"
 
-test : all
-	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -g main.c
-	@printf "Test binary created\n"
+test : debug
+	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -g main.c -o test
+	@printf "$(GREEN)Test binary created.$(END_GRAPHICS)\n"
 
 re: fclean all
 
 debug : CFLAGS=-Wall -Wextra -g
 debug : all
+	@if [ 0 = $$(expr $$(dwarfdump $(NAME) | wc -l) \> 1000) ]; then \
+		printf "$(RED)Library does not contain debug symbols. Recompiling.$(END_GRAPHICS)\n" ; \
+		make debug_re ; \
+	fi
 
 debug_re : fclean debug
+
+
+
