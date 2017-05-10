@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/10 23:14:53 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/10 23:32:41 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	fill_format(const char *restrict str, char **format)
 
 	i = 0;
 	*format = 0;
-	while (str[i] == '#' || str[i] == '0' || str[i] == '-'
-			|| str[i] == ' ' || str[i] == '+')
+	while (ft_strchr("#0- +", str[i]))
 		i++;
 	if (i == 0)
 		return (0);
