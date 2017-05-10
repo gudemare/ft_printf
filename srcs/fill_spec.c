@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/20 10:02:34 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/10 23:14:53 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,20 @@
 static int	fill_format(const char *restrict str, char **format)
 {
 	int		i;
-	int		j;
+	char	*c;
 
 	i = 0;
 	*format = 0;
 	while (str[i] == '#' || str[i] == '0' || str[i] == '-'
 			|| str[i] == ' ' || str[i] == '+')
 		i++;
-	if (i != 0)
-	{
-		*format = ft_strnew(i);
-		j = i;
-		while (j > 0)
-		{
-			(*format)[j - 1] = str[j - 1];
-			j--;
-		}
-	}
+	if (i == 0)
+		return (0);
+	*format = ft_strndup(str, i);
+	while (ft_strchr(*format, '+') && (c = ft_strchr(*format, ' ')))
+		*c = '+';
+	while (ft_strchr(*format, '-') && (c = ft_strchr(*format, '0')))
+		*c = '-';
 	return (i);
 }
 
@@ -42,12 +39,11 @@ static int	fill_width(const char *restrict str, int *width)
 
 	i = 0;
 	*width = 0;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	*width = ft_atoi(str);
 	while (ft_isdigit(str[i]))
-	{
-		*width *= 10;
-		*width += str[i] - '0';
 		i++;
-	}
 	return (i);
 }
 
@@ -55,41 +51,26 @@ static int	fill_precision(const char *restrict str, int *precision)
 {
 	int		i;
 
-	i = 0;
 	*precision = -1;
-	if (str[i] == '.')
-	{
+	if (*str != '.')
+		return (0);
+	i = 1;
+	*precision = ft_atoi(str + 1);
+	while (ft_isdigit(str[i]))
 		i++;
-		*precision = 0;
-		while (ft_isdigit(str[i]))
-		{
-			*precision *= 10;
-			*precision += str[i] - '0';
-			i++;
-		}
-	}
 	return (i);
 }
 
 static int	fill_length(const char *restrict str, char **length)
 {
 	int		i;
-	int		j;
 
 	i = 0;
 	*length = 0;
 	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j' || str[i] == 'z')
 		i++;
 	if (i != 0)
-	{
-		*length = ft_strnew(i);
-		j = i;
-		while (j > 0)
-		{
-			(*length)[j - 1] = str[j - 1];
-			j--;
-		}
-	}
+		*length = ft_strndup(str, i);
 	return (i);
 }
 

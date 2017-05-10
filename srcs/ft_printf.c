@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 13:00:10 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/19 21:53:39 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/10 22:27:25 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int		handle_flag(const char *restrict *str, va_list ap)
 {
 	t_spec		spec;
 
-	spec.conv = '\0';
 	*str += fill_spec(*str, &spec);
 	return (handle_format(handle_convertion(ap, spec), spec));
 }
