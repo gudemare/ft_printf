@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_convertion.c                                :+:      :+:    :+:   */
+/*   handle_conversion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:10:39 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/10 23:14:08 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/10 23:22:24 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*handle_convertion(va_list ap, t_spec spec)
+char	*handle_conversion(va_list ap, t_spec spec)
 {
 	char	*f_o;
 
