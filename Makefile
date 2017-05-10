@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/05/08 22:03:32 by gudemare         ###   ########.fr        #
+#    Updated: 2017/05/10 22:47:53 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ debug : all
 		printf "$(RED)Library does not contain debug symbols. Recompiling.$(END_GRAPHICS)\n" ; \
 		make debug_re ; \
 	fi
+	@printf "\e[K$(GREEN)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(GREEN) has successfully compiled $(YELLOW)(with debug symbols).$(END_GRAPHICS)\n"
 
 debug_re : fclean debug
 
