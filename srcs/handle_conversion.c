@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:10:39 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/10 23:27:44 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:21:40 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*handle_conversion(va_list ap, t_spec spec)
 {
 	char	*f_o;
 
-	if (ft_strchr("dDioOpuUxX", spec.conv))
+	if (ft_strchr("diopuxX", spec.conv))
 	{
 		while (spec.format && spec.precision != -1
 				&& ft_strchr(spec.format, '0') != NULL)
