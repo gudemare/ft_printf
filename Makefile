@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/05/10 22:47:53 by gudemare         ###   ########.fr        #
+#    Updated: 2017/05/11 19:41:52 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ fclean :
 	@printf "$(YELLOW)Library $(BOLD)$(NAME)$(END_GRAPHICS)$(YELLOW) and its objects files have been removed.$(END_GRAPHICS)\n"
 
 test : debug
-	@$(CC) $(CFLAGS) -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -g main.c -o test
+	@$(CC) -Wall -Wextra -I $(HEADERS_DIR) -I $(HEADERS_LIB) -L. -lftprintf -g main.c -o test
 	@printf "$(GREEN)Test binary created.$(END_GRAPHICS)\n"
 
 re: fclean all
