@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 16:27:11 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/10 23:32:41 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:17:12 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,18 @@ int			fill_spec(const char *restrict str, t_spec *spec)
 	i += fill_precision(str + i, &(spec->precision));
 	i += fill_length(str + i, &(spec->length));
 	spec->conv = str[i];
+	if (ft_strchr("DOU", (int)spec->conv))
+	{
+		spec->conv += 32;
+		if (!spec->length && !(spec->length = ft_strdup("l")))
+			return (0);
+		else
+		{
+			if (!(spec->length = ft_strextend(spec->length, 1)))
+				return (0);
+			spec->length[ft_strlen(spec->length)] = 'l';
+		}
+	}
 	i++;
 	return (i);
 }
