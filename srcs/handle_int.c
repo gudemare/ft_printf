@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 14:35:41 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/11 18:37:26 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:07:30 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ char	*handle_int(va_list ap, t_spec spec)
 		return (0);
 	if (spec.precision == 0 && ft_strcmp(f_o, "0") == 0)
 		*f_o = '\0';
+	if (*f_o != '-' && (spec.conv == 'd' || spec.conv == 'i') && spec.format &&
+			(ft_strchr(spec.format, ' ') || ft_strchr(spec.format, '+')))
+	{
+		if (!(f_o = ft_strextend(f_o, 1)))
+			return (0);
+		ft_memmove(f_o + 1, f_o, ft_strlen(f_o));
+		*f_o = (ft_strchr(spec.format, ' ')) ? ' ' : '+';
+	}
 	(void)spec;
 	return (f_o);
 }
