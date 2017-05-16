@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 00:06:46 by gudemare          #+#    #+#             */
-/*   Updated: 2017/04/13 17:07:08 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:18:43 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strncat(char *dst, const char *src, size_t n);
 char				*ft_strncpy(char *dst, const char *src, size_t n);
 char				*ft_strndup(const char *src, size_t n);
-char				*ft_strnew(size_t size);
 char				*ft_strnew(size_t size);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 char				*ft_strrchr(const char *s, int c);
