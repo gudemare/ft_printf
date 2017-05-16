@@ -6,10 +6,11 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 14:35:41 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/16 16:22:10 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:23:12 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "ft_printf.h"
 
 char	*handle_int(va_list ap, t_spec spec)
@@ -26,6 +27,7 @@ char	*handle_int(va_list ap, t_spec spec)
 	{
 		if (!(tmp = ft_strjoin((ft_strchr(spec.format, ' ')) ? " " : "+", f_o)))
 			return (0);
+		free(f_o);
 		f_o = tmp;
 	}
 	return (f_o);
