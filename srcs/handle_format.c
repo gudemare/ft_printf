@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:09:49 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/16 14:38:30 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/16 15:11:51 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@ static char		*min_width(char *f_o, int min_width, char *format)
 
 int				handle_format(char *f_o, t_spec spec)
 {
-	int		ret;
-
 	if ((size_t)spec.min_width > ft_strlen(f_o))
-		if (!(f_o = min_width(f_o, spec.min_width, spec.format)))
+		if (!(f_o = min_width(f_o,
+				spec.min_width - ((*f_o == '\0' && spec.conv == 'c') ? 1 : 0),
+				spec.format)))
 			return (-1);
 	(void)spec;
-	ret = ft_strlen(f_o);
 	ft_putstr(f_o);
 	free(f_o);
-	return ((spec.conv == 'c' && ret == 0) ? 1 : ret);
+	if (spec.conv == 'c')
+	{
+		if (!*f_o)
+			return (1);
+		else if (ft_strlen(f_o) < (size_t)spec.min_width)
+			return (spec.min_width);
+	}
+	return (ft_strlen(f_o));
 }
