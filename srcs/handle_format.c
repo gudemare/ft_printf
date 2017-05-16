@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:09:49 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/16 15:59:05 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:07:05 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ static char		*min_width(char *f_o, int min_width, char *format, char conv)
 			f_o, ft_strlen(f_o));
 	free(f_o);
 	f_o = tmp;
-	if (format && ft_strchr("di", conv) && ft_strchr(format, '+')
-			&& ft_strchr(format, '0'))
+	if (format && ft_strchr("di", conv) && ft_strchr(format, '0'))
 	{
 		while (*tmp == '0')
 			tmp++;
-		*f_o = *tmp;
-		*tmp = '0';
+		if (*tmp == '+' || *tmp == '-')
+		{
+			*f_o = *tmp;
+			*tmp = '0';
+		}
 	}
 	return (f_o);
 }
