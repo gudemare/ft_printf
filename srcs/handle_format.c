@@ -6,7 +6,7 @@
 /*   By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 00:09:49 by gudemare          #+#    #+#             */
-/*   Updated: 2017/05/16 16:11:12 by gudemare         ###   ########.fr       */
+/*   Updated: 2017/05/16 18:06:47 by gudemare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int				handle_format(char *f_o, t_spec spec)
 			return (-1);
 	ft_putstr(f_o);
 	ret = ft_strlen(f_o);
+	if (ret == spec.min_width - 1)
+		ft_putchar(f_o[spec.min_width]);
 	free(f_o);
 	if (spec.conv == 'c')
 	{
