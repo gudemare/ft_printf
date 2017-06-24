@@ -6,13 +6,13 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/06/24 00:48:56 by gudemare         ###   ########.fr        #
+#    Updated: 2017/06/24 04:47:13 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libftprintf.a
 
-CC			=	clang
+CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 
 LIB			=	libft/libft.a

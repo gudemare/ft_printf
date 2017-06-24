@@ -6,7 +6,7 @@
 #    By: gudemare <gudemare@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/18 01:13:53 by gudemare          #+#    #+#              #
-#    Updated: 2017/06/23 09:52:45 by gudemare         ###   ########.fr        #
+#    Updated: 2017/06/24 04:47:24 by gudemare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@
 
 NAME		=	libft.a
 
-CC			=	clang
+CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 
 HEADERS_DIR		=	includes/
